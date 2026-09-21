@@ -198,6 +198,7 @@ function pintarTextos() {
   $("#t-campo-arriba").textContent = T.p4.arriba;
   $("#t-campo-titulo").textContent = T.p4.titulo;
   $("#lede-campo").innerHTML = T.p4.lede.map(esc).join("<br>");
+  $("#t-sc-titulo").textContent = T.p1.sobreTitulo;
   $("#t-etiqueta-1").textContent = T.p4.etiqueta[0];
   $("#etiqueta-firma").textContent = T.p2.firma;
   $("#etiqueta-desde").textContent = T.p4.etiqueta[1];
@@ -651,7 +652,7 @@ function tocarFlor(pl) {
     return d;
   }
 
-  pieza(88, 68, 13, 1, '<svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="10.5" fill="#FFE9A3"/><circle r="7.6" fill="#FFF3C9"/></svg>');
+  pieza(88, 68, 13, 1, '<svg viewBox="-12 -12 24 24" aria-hidden="true"><circle r="10.5" fill="#FFE9A3"/><circle r="7.6" fill="#FFF3C9"/></svg>', "sol");
 
   [[18, 78, 3.4], [26, 82, 2.6], [33, 76, 2.2]].forEach(p =>
     pieza(p[0], p[1], p[2], 2,
@@ -773,6 +774,7 @@ function decirHito() {
 function alejarCantero() {
   const n = capa.children.length;
   capa.style.transform = "scale(" + clamp(1 - n * 0.013, .52, 1).toFixed(3) + ")";
+  cantero.style.setProperty("--luz", (Math.min(1, n / 14) * 0.6).toFixed(3));
 }
 
 function ponerPlanta(dato, guardada) {
@@ -808,7 +810,7 @@ let huboRegalo = false;
   } catch (e) { return; }
   if (plantadas.length < 3 || !ultima || dadas >= 6) return;
   if (Date.now() - ultima < 12 * 3600000) return;
-  plantadas.push({ x: Math.round(clamp(rnd(20, 94), 17, 97)), h: Math.round(rnd(190, 262)),
+  plantadas.push({ x: Math.round(clamp(rnd(30, 94), 18, 97)), h: Math.round(rnd(190, 262)),
                    s: Math.floor(Math.random() * 1e6), t: Date.now(), r: 1 });
   huboRegalo = true;
   try { localStorage.setItem(LLAVE_REGALO, String(dadas + 1)); } catch (e) {}
@@ -918,12 +920,21 @@ async function sembrar(xPct, yDedo, alturaObjetivo) {
   if (cola.length && creciendo < 3) { const n = cola.shift(); sembrar(n[0], n[1], n[2]); creciendo++; }
 }
 
+function limiteIzq() {
+  const c = cantero.getBoundingClientRect();
+  const s = $("#cierre");
+  if (!s || !c.width) return 17;
+  const r = s.getBoundingClientRect();
+  return clamp(((r.right - c.left + 12) / c.width) * 100, 6, 44);
+}
+
 function elegirX(xPreferida) {
-  let x = clamp(xPreferida, 17, 97);
+  const min = limiteIzq();
+  let x = clamp(xPreferida, min, 97);
   for (let i = 0; i < 4; i++) {
     const choca = plantadas.some(d => Math.abs(d.x - x) < 3);
     if (!choca) break;
-    x = clamp(x + rnd(-6, 6), 17, 97);
+    x = clamp(x + rnd(-6, 6), min, 97);
   }
   return x;
 }
@@ -968,7 +979,7 @@ tierra.addEventListener("keydown", ev => {
   if (creciendo >= 3) return;
   const rect = cantero.getBoundingClientRect();
   creciendo++;
-  sembrar(elegirX(rnd(20, 94)), rect.bottom - SUELO - 40, 230);
+  sembrar(elegirX(rnd(limiteIzq() + 4, 94)), rect.bottom - SUELO - 40, 230);
 });
 
 (function progreso() {
