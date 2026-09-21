@@ -272,6 +272,7 @@ h2{font-size:clamp(2.2rem,1.7rem + 3.2vw,3.6rem);line-height:.98;letter-spacing:
 .a4-texto h2{font-size:clamp(2.1rem,1.6rem + 2.4vw,2.9rem)}
 .a4-texto .lede{font-size:17px;line-height:1.5;color:var(--tinta-2);max-width:34ch}
 .cantero{
+  --luz:0;
   position:relative;flex:1;min-height:320px;
   margin-top:auto;
   border-top:1.5px solid var(--tinta);
@@ -286,6 +287,15 @@ h2{font-size:clamp(2.2rem,1.7rem + 3.2vw,3.6rem);line-height:.98;letter-spacing:
   pointer-events:none;
 }
 .escena .pieza{position:absolute;transform:translateX(-50%);line-height:0}
+.escena .sol{
+  transform:translateX(-50%) translate(calc(var(--luz,0) * -22px),calc(var(--luz,0) * 58px));
+  transition:transform 1.4s ease;
+}
+.cantero::after{
+  content:"";position:absolute;inset:0;z-index:7;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,196,0,0) 26%,rgba(226,140,0,.22) 100%);
+  opacity:var(--luz);transition:opacity 1.4s ease;
+}
 .escena .pieza svg{display:block;width:100%;height:100%}
 
 .mariposa{animation:revolotear 16s ease-in-out infinite}
@@ -332,23 +342,43 @@ h2{font-size:clamp(2.2rem,1.7rem + 3.2vw,3.6rem);line-height:.98;letter-spacing:
 }
 .estado.trabajando::before{background:var(--tomate)}
 
-.etiqueta{
-  position:absolute;left:22px;z-index:9;
-  bottom:calc(var(--suelo,96px) - 18px);
-  width:118px;padding:9px 10px 10px;
-  background:var(--papel);border:1.4px solid var(--tinta);
-  box-shadow:var(--sombra);
-  transform:rotate(-5deg);text-align:center;
+/* el mismo sobrecito de la primera pantalla, ahora vacío y clavado al final
+   de la hilera — lo que hace un jardinero para acordarse de qué plantó */
+.sobre-clavado{
+  position:absolute;left:12px;z-index:9;
+  bottom:calc(var(--suelo,96px) - 30px);
+  width:clamp(106px,29vw,138px);
+  transform:rotate(-4.5deg);
   pointer-events:none;
 }
-.etiqueta::after{
-  content:"";position:absolute;left:50%;top:100%;
-  width:4px;height:34px;margin-left:-2px;
+.sc-papel{
+  display:block;position:relative;
+  background:var(--papel-2);
+  border:1.5px solid var(--tinta);
+  padding:12px 10px 11px;
+  text-align:center;
+  clip-path:polygon(0 7px,9% 1px,21% 6px,34% 2px,47% 7px,59% 1px,72% 6px,85% 2px,95% 7px,100% 3px,100% 100%,0 100%);
+}
+.sobre-clavado::before{
+  content:"";position:absolute;left:4px;top:5px;right:-4px;bottom:-5px;
+  background:rgba(34,49,42,.13);
+  clip-path:polygon(0 7px,9% 1px,21% 6px,34% 2px,47% 7px,59% 1px,72% 6px,85% 2px,95% 7px,100% 3px,100% 100%,0 100%);
+}
+.sc-estaca{
+  display:block;width:5px;height:38px;margin:0 auto;
   background:var(--papel-3);border:1.4px solid var(--tinta);border-top:0;
 }
-.etiqueta .l1{font-size:12px;font-weight:500;color:var(--tinta-2);margin:0}
-.etiqueta .l2{font-family:"Nothing You Could Do",cursive;font-size:22px;line-height:1.1;margin:2px 0 0}
-.etiqueta .l3{font-size:10px;color:var(--tomate);margin:3px 0 0;letter-spacing:.04em}
+.sc-titulo{
+  display:block;font-family:"Young Serif",Georgia,serif;
+  font-size:15px;line-height:1.04;color:var(--tinta);
+}
+.sc-filete{display:block;height:1px;background:var(--tinta);opacity:.5;margin:8px 2px}
+.sc-feliz{display:block;font-size:11px;font-weight:500;color:var(--tinta-2)}
+.sc-firma{
+  display:block;font-family:"Nothing You Could Do",cursive;
+  font-size:21px;line-height:1.1;color:var(--tinta);margin-top:1px;
+}
+.sc-desde{display:block;font-size:9.5px;color:var(--tomate);letter-spacing:.04em;margin-top:3px}
 
 .semilla-cae{
   position:absolute;width:7px;height:9px;border-radius:50% 50% 45% 45%;
@@ -373,6 +403,13 @@ h2{font-size:clamp(2.2rem,1.7rem + 3.2vw,3.6rem);line-height:.98;letter-spacing:
 .flower .tallo{fill:none;stroke:var(--pasto-os);stroke-linecap:round}
 .flower .hoja{fill:var(--hoja)}
 .flower .sombrita{fill:rgba(62,116,52,.16)}
+.planta .sombrita{
+  transform-box:fill-box;transform-origin:50% 100%;
+  transform:translateX(calc(var(--luz,0) * -7px))
+            scaleX(calc(1 + var(--luz,0) * 1.6))
+            skewX(calc(var(--luz,0) * -36deg));
+  transition:transform 1.4s ease;
+}
 .pr{transform-box:fill-box}
 .pb{transform-box:fill-box}
 
