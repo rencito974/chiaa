@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FBF4E4">
+<meta name="description" content="abrilo, es cortito">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="flores amarillas">
+<meta property="og:description" content="abrilo, es cortito">
+<title>Flores Amarillas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="fuentes" rel="stylesheet" media="print" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Nothing+You+Could+Do&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Nothing+You+Could+Do&display=swap"></noscript>
+<script>
+
+(function () {
+  var l = document.getElementById("fuentes");
+  if (!l) return;
+  var ok = function () { l.media = "all"; };
+  l.addEventListener("load", ok);
+  l.addEventListener("error", ok);
+  setTimeout(ok, 2500);
+})();
+</script>
+
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<canvas id="petalos" aria-hidden="true"></canvas>
+
+<div id="progreso" aria-hidden="true"><span class="linea"></span></div>
+
+<section class="acto" id="a1">
+  <p class="eyebrow" style="margin-top:clamp(20px,4vh,34px)" id="tag-fecha">21 de septiembre</p>
+  <h1 id="t-titulo">Flores<br>amarillas</h1>
+  <svg class="subrayado" viewBox="0 0 250 10" preserveAspectRatio="none" aria-hidden="true">
+    <path pathLength="100" d="M3 6 C 40 2 78 9 116 5 C 154 1 196 8 247 4"/>
+  </svg>
+  <p class="para-quien"><span class="pre" id="t-prefijo">para</span><span class="nombre" id="nombre">Luli</span></p>
+
+  <div class="sobrecito-zona">
+    <button class="sobrecito" id="sobrecito" aria-label="Abrir el sobrecito de semillas">
+      <span class="tira">
+        <svg viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3l2 2 2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="t-tira">abrí por acá</span>
+        <svg viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3l2 2 2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="sobre-cuerpo">
+        <span class="sobre-linea" id="t-sobre-arriba">SEMILLAS · VARIADAS</span>
+        <span class="sobre-titulo" id="t-sobre-titulo">Flores amarillas</span>
+        <span class="sobre-ilu"><span class="sello"></span></span>
+        <span class="sobre-filete"></span>
+        <span class="sobre-chica" id="t-sobre-abajo">contenido: más de las que entran en una mano</span>
+      </span>
+      <span class="sobre-fecha" id="t-sobre-fecha">21.09</span>
+    </button>
+  </div>
+
+  <div class="post-sobre" id="post-sobre">
+    <button class="pildora" id="ir-carta" type="button" hidden>seguí</button>
+  </div>
+
+  <span class="bajar" id="bajar" aria-hidden="true">
+    <svg viewBox="0 0 14 26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 1v16" stroke-width="1.4" opacity=".55"/>
+      <path d="M2.4 13.5 7 18.6l4.6-5.1" stroke-width="1.8"/>
+    </svg>
+  </span>
+</section>
+
+<section class="acto" id="a2">
+  <article class="carta" translate="no">
+    <p class="fecha" id="carta-fecha">21 de septiembre</p>
+    <div id="carta-cuerpo"></div>
+    <p class="firma" id="carta-firma">Renzo</p>
+    <span class="carta-flor" id="carta-flor" aria-hidden="true"></span>
+  </article>
+  <button class="pildora" id="ir-ramo" type="button">ver el ramo</button>
+</section>
+
+<section class="acto" id="a3">
+  <p class="eyebrow" id="t-ramo-arriba" style="margin-top:clamp(24px,4vh,38px)">tu ramo</p>
+  <h2 id="t-ramo-titulo" style="margin-top:8px">Todas las<br>que quieras</h2>
+  <p class="notita" id="notita"><span></span></p>
+  <div class="ramo-zona">
+    <div id="ramo"></div>
+    <button class="pildora ramo-boton" id="una-mas" type="button" aria-label="Agregar otra flor al ramo">una más</button>
+  </div>
+</section>
+
+<section class="acto" id="a4">
+  <div class="a4-texto">
+    <p class="eyebrow" id="t-campo-arriba">ahora vos</p>
+    <h2 id="t-campo-titulo" style="margin-top:8px">Ahora plantás vos</h2>
+    <p class="lede" id="lede-campo">Apretá la tierra y soltá.<br>La semilla tarda un poco en salir.</p>
+    <p class="estado" id="estado">apretá la tierra</p>
+  </div>
+
+  <div class="cantero" id="cantero">
+    <svg class="paisaje" id="paisaje" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="escena" id="escena" aria-hidden="true"></div>
+    <svg class="pastofr" id="pastofr" viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="suelo" id="suelo"><svg viewBox="0 0 400 116" preserveAspectRatio="none" aria-hidden="true" id="suelo-svg"></svg></div>
+    <div id="capa-plantas"></div>
+    <div class="tierra-zona" id="tierra" role="button" tabindex="0" aria-label="Apretá la tierra para plantar una semilla"></div>
+    <div class="etiqueta">
+      <p class="l1" id="t-etiqueta-1">feliz primavera</p>
+      <p class="l2" id="etiqueta-firma">Renzo</p>
+      <p class="l3" id="etiqueta-desde" hidden>desde el 21 · 09</p>
+    </div>
+  </div>
+</section>
+
+<script src="textos.js"></script>
+<script src="flores.js"></script>
+</body>
+</html>

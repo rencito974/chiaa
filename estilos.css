@@ -1,0 +1,492 @@
+:root{
+  color-scheme:only light;
+
+  --papel:#FBF4E4;
+  --papel-2:#F3E9D2;
+  --papel-3:#EADCBE;
+  --carta:#FFFBF0;
+
+  --cielo:#A9CDE4;
+  --cielo-cl:#D6E8F1;
+
+  --pasto-cl:#9CC55E;
+  --pasto:#6BA33F;
+  --pasto-os:#3E7434;
+  --hoja:#58913F;
+
+  --tierra:#8A5E38;
+  --tierra-os:#5E3D22;
+  --terron:#A67A4E;
+
+  --sol:#FFC400;
+  --sol-cl:#FFE04D;
+  --sol-os:#E28C00;
+  --centro:#A3591B;
+  --centro-os:#6E3A10;
+  --centro-cl:#C98A2E;
+
+  --patito:#FFE873;
+  --patito-cl:#FFF7CE;
+  --patito-os:#F2C63C;
+
+  --tomate:#EF5B3C;
+
+  --tinta:#22312A;
+  --tinta-2:#55654F;
+
+  --sombra:4px 5px 0 rgba(34,49,42,.13);
+  --sombra-chica:3px 3px 0 var(--tinta);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+
+html,body{
+
+  background-color:var(--papel);
+  background-image:linear-gradient(var(--papel),var(--papel));
+}
+body{
+  margin:0;
+  color:var(--tinta);
+  font-family:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+
+body::after{
+  content:"";position:fixed;inset:0;z-index:30;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/></filter><rect width='150' height='150' filter='url(%23n)'/></svg>");
+}
+@media (max-width:480px){body::after{opacity:.038}}
+
+h1,h2{
+  font-family:"Young Serif",Georgia,"Times New Roman",serif;
+  font-weight:400;margin:0;color:var(--tinta);
+}
+h1{font-size:clamp(2.9rem,2.1rem + 4.4vw,4.6rem);line-height:.94;letter-spacing:-.015em}
+h2{font-size:clamp(2.2rem,1.7rem + 3.2vw,3.6rem);line-height:.98;letter-spacing:-.012em}
+
+.eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--tomate);margin:0;
+}
+.lede{font-size:17px;line-height:1.5;color:var(--tinta-2);margin:0;max-width:30ch}
+.mano{font-family:"Nothing You Could Do",cursive}
+
+.acto{
+  position:relative;
+  min-height:100vh;min-height:100svh;
+  padding:0 20px env(safe-area-inset-bottom,0px);
+  display:flex;flex-direction:column;
+}
+
+#progreso{
+  position:fixed;left:7px;top:14vh;bottom:14vh;width:14px;z-index:20;pointer-events:none;
+}
+#progreso .linea{
+  position:absolute;left:6px;top:0;width:2px;height:100%;
+  background:var(--pasto-os);opacity:.4;
+  transform:scaleY(0);transform-origin:top center;
+}
+#progreso .hojita{
+  position:absolute;left:5px;width:11px;height:9px;
+  background:var(--pasto-os);opacity:.45;
+  border-radius:0 100% 0 100%;
+  transform:scale(0);transform-origin:left center;
+  transition:transform .26s cubic-bezier(.2,1.4,.4,1);
+}
+#progreso .hojita.on{transform:scale(1)}
+@media (max-width:360px){#progreso{display:none}}
+
+.pildora{
+  font:600 16px/1 "Instrument Sans",sans-serif;color:var(--tinta);
+  min-height:50px;padding:0 26px;
+  background:var(--sol);border:1.5px solid var(--tinta);border-radius:25px;
+  box-shadow:var(--sombra-chica);
+  cursor:pointer;touch-action:manipulation;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  transition:transform .09s ease,box-shadow .09s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.pildora:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+.pildora:focus-visible{outline:2.5px solid var(--tomate);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.pildora:hover{background:var(--sol-cl)}}
+
+#a1{justify-content:flex-start;padding-top:clamp(26px,5vh,44px)}
+#a1 h1{margin-top:10px}
+.para-quien{display:flex;align-items:baseline;gap:9px;margin-top:16px}
+.para-quien .pre{font-style:italic;font-size:19px;color:var(--tinta-2)}
+.para-quien .nombre{
+  font-family:"Nothing You Could Do",cursive;
+  font-size:clamp(2.6rem,2rem + 3vw,3.6rem);line-height:.8;
+  color:var(--tomate);
+}
+.subrayado{display:block;width:min(64vw,250px);height:10px;margin-top:2px;overflow:visible}
+.subrayado path{fill:none;stroke:var(--tomate);stroke-width:3.4;stroke-linecap:round}
+.js .subrayado path{animation:escribir .62s ease-out .5s backwards}
+@keyframes escribir{
+  from{stroke-dasharray:100;stroke-dashoffset:100}
+  to{stroke-dasharray:100;stroke-dashoffset:0}
+}
+
+.sobrecito-zona{
+  flex:1;display:flex;align-items:flex-start;justify-content:center;
+  margin-top:clamp(20px,4vh,34px);padding-bottom:30px;
+}
+.sobrecito{
+  position:relative;
+  width:min(78vw,300px);
+  background:var(--papel-2);border:1.5px solid var(--tinta);
+  box-shadow:var(--sombra);
+  transform:rotate(-2.4deg);
+  cursor:pointer;padding:0;text-align:left;font:inherit;color:inherit;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:transform .18s ease;
+}
+.js .sobrecito{animation:respirar 5s ease-in-out infinite}
+@keyframes respirar{0%,100%{transform:rotate(-2.4deg) scale(1)}50%{transform:rotate(-2.4deg) scale(1.008)}}
+.sobrecito:active{animation:none;transform:rotate(-2.4deg) scale(.985)}
+.sobrecito:focus-visible{outline:2.5px solid var(--tomate);outline-offset:5px}
+
+.tira{
+  position:relative;z-index:2;
+  height:36px;display:flex;align-items:center;justify-content:center;gap:8px;
+  border-bottom:1.5px dashed var(--tinta);
+  background:var(--papel-2);
+  font-size:13px;font-weight:500;color:var(--tinta-2);
+  transform-origin:left center;
+}
+.tira svg{width:8px;height:8px;flex:none}
+.sobrecito:active .tira{background:var(--sol-cl)}
+
+.sobre-cuerpo{display:block;padding:18px 18px 16px;text-align:center}
+.sobre-linea{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--tinta-2);margin:0}
+.sobre-titulo{display:block;font-family:"Young Serif",Georgia,serif;font-size:30px;line-height:1.02;margin:8px 0 0}
+.sobre-ilu{display:block;position:relative;margin:14px auto 0;width:150px;height:158px}
+.sobre-ilu .sello{
+  display:block;position:absolute;left:0;top:14px;width:150px;height:130px;
+  background:var(--sol-cl);border-radius:50%;
+}
+.sobre-ilu .flower{position:absolute;left:50%;bottom:0;transform:translateX(-50%)}
+.sobre-filete{display:block;height:1px;background:var(--tinta);margin:14px 0 10px;opacity:.85}
+.sobre-chica{display:block;font-style:italic;font-size:12px;color:var(--tinta-2);margin:0 0 8px;line-height:1.4}
+.sobre-fecha{
+  display:block;position:absolute;right:10px;bottom:8px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--tomate);
+}
+
+.sobrecito.abierto{animation:none;transform:rotate(-4.2deg) translateY(10px)}
+.sobrecito.abierto .tira{
+  transform:rotate(-26deg) translate(20px,-130px);opacity:0;
+  transition:transform .62s cubic-bezier(.3,0,.2,1),opacity .62s ease;
+}
+.sobrecito.abierto{cursor:default}
+
+.post-sobre{
+  display:flex;justify-content:center;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s ease,transform .4s ease;
+  min-height:56px;margin-top:2px;
+}
+.post-sobre.on{opacity:1;transform:none}
+
+.bajar{
+  position:absolute;left:50%;z-index:6;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  width:14px;line-height:0;color:var(--tinta-2);
+  opacity:.6;pointer-events:none;
+  animation:bajarBob 2.6s ease-in-out infinite;
+  transition:opacity .45s ease;
+}
+.bajar svg{display:block;width:100%;height:auto}
+.bajar.ida{opacity:0}
+@keyframes bajarBob{
+  0%,100%{transform:translateX(-50%) translateY(-3px)}
+  50%{transform:translateX(-50%) translateY(5px)}
+}
+
+#a2{justify-content:center;align-items:center;gap:26px;padding-top:40px;padding-bottom:50px;overflow:hidden}
+.carta{
+  position:relative;
+  width:min(100%,430px);
+  min-height:64vh;min-height:64svh;
+  background:var(--carta);border:1.5px solid var(--tinta);
+  box-shadow:var(--sombra);
+  transform:rotate(-1.6deg);
+  padding:30px 26px 34px;
+}
+.carta .fecha{font-style:italic;font-size:13px;color:var(--tomate);margin:0 0 18px}
+.carta p{font-size:17px;line-height:1.62;margin:0 0 1em;max-width:30ch}
+.carta p:last-of-type{margin-bottom:0}
+.firma{
+  font-family:"Nothing You Could Do",cursive;
+  font-size:2.3rem;line-height:1;margin:24px 0 0;color:var(--tinta);
+}
+.carta-flor{
+  position:absolute;right:-26px;bottom:-22px;
+  transform:rotate(8deg);pointer-events:none;
+}
+
+#a3{padding-top:clamp(30px,6vh,50px);overflow:hidden}
+.notita{
+  min-height:4.2em;max-width:26ch;margin:16px 0 0;
+  font-style:italic;font-size:19px;line-height:1.36;color:var(--tinta);
+}
+.notita span{
+  display:block;opacity:0;transform:translateY(6px);
+  transition:opacity .3s ease,transform .3s ease;
+}
+.notita span.on{opacity:1;transform:none}
+
+.ramo-zona{position:relative;flex:1;min-height:420px}
+#ramo{
+  position:absolute;left:50%;bottom:34px;
+  width:1px;height:1px;
+  transform:translateX(-12%);
+}
+#ramo .banda{position:absolute;left:0;bottom:0;width:1px;height:1px;transform-origin:bottom center}
+.js #ramo .banda-0{animation:mecer 6.2s ease-in-out -1.2s infinite}
+.js #ramo .banda-1{animation:mecer 7.1s ease-in-out -3.4s infinite}
+.js #ramo .banda-2{animation:mecer 5.4s ease-in-out -2.1s infinite}
+@keyframes mecer{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+
+#ramo .vara{
+  position:absolute;left:0;bottom:0;
+  transform-origin:bottom center;
+}
+#ramo .vara .flower{transform-origin:bottom center}
+.cinta{position:absolute;left:50%;bottom:6px;width:104px;transform:translateX(-50%);z-index:60}
+
+.ramo-boton{position:absolute;right:6px;bottom:52px;z-index:70}
+
+#a4{padding:0 0 env(safe-area-inset-bottom,0px);overflow:hidden;background:var(--papel)}
+.a4-texto{
+  width:100%;max-width:640px;margin:0 auto;
+  padding:clamp(26px,5vh,44px) 20px clamp(14px,2.4vh,22px);
+  display:flex;flex-direction:column;gap:10px;
+}
+.a4-texto h2{font-size:clamp(2.1rem,1.6rem + 2.4vw,2.9rem)}
+.a4-texto .lede{font-size:17px;line-height:1.5;color:var(--tinta-2);max-width:34ch}
+.cantero{
+  position:relative;flex:1;min-height:320px;
+  margin-top:auto;
+  border-top:1.5px solid var(--tinta);
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+.paisaje{position:absolute;left:0;right:0;top:0;width:100%;height:calc(100% - var(--suelo,96px))}
+
+.escena{
+  position:absolute;left:0;right:0;top:0;
+  height:calc(100% - var(--suelo,96px));
+  pointer-events:none;
+}
+.escena .pieza{position:absolute;transform:translateX(-50%);line-height:0}
+.escena .pieza svg{display:block;width:100%;height:100%}
+
+.mariposa{animation:revolotear 16s ease-in-out infinite}
+@keyframes revolotear{
+  0%   {transform:translate(-50%,0) rotate(-6deg)}
+  22%  {transform:translate(calc(-50% + 34px),-22px) rotate(8deg)}
+  47%  {transform:translate(calc(-50% + 8px),-46px) rotate(-10deg)}
+  71%  {transform:translate(calc(-50% - 30px),-18px) rotate(6deg)}
+  100% {transform:translate(-50%,0) rotate(-6deg)}
+}
+
+.pastofr{
+  position:absolute;left:0;right:0;bottom:var(--suelo,96px);
+  width:100%;height:clamp(54px,13vh,88px);
+}
+.suelo{
+  position:absolute;left:0;right:0;bottom:0;height:var(--suelo,96px);
+  background:var(--tierra);
+}
+.suelo svg{position:absolute;left:0;top:-12px;width:100%;height:calc(100% + 12px);display:block}
+#capa-plantas{
+  pointer-events:none;
+  position:absolute;left:0;right:0;
+  bottom:var(--suelo,96px);height:0;
+  transform-origin:bottom center;
+  transition:transform .7s cubic-bezier(.22,.9,.3,1);
+}
+#capa-plantas .planta{position:absolute;bottom:0;transform:translateX(-50%)}
+.tierra-zona{
+  position:absolute;left:0;right:0;bottom:0;height:var(--suelo,96px);
+  touch-action:pan-y pinch-zoom;cursor:pointer;
+}
+.tierra-zona:focus-visible{outline:2.5px solid var(--tomate);outline-offset:-4px}
+
+.estado{
+  margin:2px 0 0;min-height:2.6em;
+  font:500 16px/1.3 "Instrument Sans",sans-serif;color:var(--tinta);
+  display:flex;align-items:flex-start;gap:9px;
+}
+.estado::before{
+  content:"";flex:none;width:9px;height:9px;margin-top:5px;border-radius:50%;
+  background:var(--sol);border:1.4px solid var(--tinta);
+  transition:background .2s ease;
+}
+.estado.trabajando::before{background:var(--tomate)}
+
+.etiqueta{
+  position:absolute;left:22px;z-index:9;
+  bottom:calc(var(--suelo,96px) - 18px);
+  width:118px;padding:9px 10px 10px;
+  background:var(--papel);border:1.4px solid var(--tinta);
+  box-shadow:var(--sombra);
+  transform:rotate(-5deg);text-align:center;
+  pointer-events:none;
+}
+.etiqueta::after{
+  content:"";position:absolute;left:50%;top:100%;
+  width:4px;height:34px;margin-left:-2px;
+  background:var(--papel-3);border:1.4px solid var(--tinta);border-top:0;
+}
+.etiqueta .l1{font-size:12px;font-weight:500;color:var(--tinta-2);margin:0}
+.etiqueta .l2{font-family:"Nothing You Could Do",cursive;font-size:22px;line-height:1.1;margin:2px 0 0}
+.etiqueta .l3{font-size:10px;color:var(--tomate);margin:3px 0 0;letter-spacing:.04em}
+
+.semilla-cae{
+  position:absolute;width:7px;height:9px;border-radius:50% 50% 45% 45%;
+  background:#4A3A22;z-index:7;pointer-events:none;
+}
+.polvareda{
+  position:absolute;width:44px;height:22px;margin:-11px 0 0 -22px;z-index:6;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(166,122,78,.75) 0%,rgba(166,122,78,0) 70%);
+}
+
+.pildora,.sobrecito,.cantero,.tierra-zona,.etiqueta,.estado,.notita,.tira{
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.carta{-webkit-user-select:text;user-select:text}
+
+.flower,.planta{--f-sol:var(--sol);--f-os:var(--sol-os);--f-cl:var(--sol-cl)}
+.flower{display:block;line-height:0}
+.flower svg{display:block;overflow:visible}
+.flower .tallo{fill:none;stroke:var(--pasto-os);stroke-linecap:round}
+.flower .hoja{fill:var(--hoja)}
+.flower .sombrita{fill:rgba(62,116,52,.16)}
+.pr{transform-box:fill-box}
+.pb{transform-box:fill-box}
+
+.planta .cuerpo{transform-origin:bottom center;transform:scaleY(.06)}
+.planta .brote{transform-origin:bottom center;transform:scale(0) rotate(-30deg)}
+.planta .hoja-i,.planta .hoja-d{transform-box:fill-box;transform:scale(.1,.5)}
+.planta .hoja-i{transform-origin:100% 50%}
+.planta .hoja-d{transform-origin:0% 50%}
+.planta .capullo{transform-box:fill-box;transform-origin:center bottom;transform:scale(0)}
+.planta .corola{transform-box:fill-box;transform-origin:center;transform:scale(0)}
+.planta .monton{transform-box:fill-box;transform-origin:center bottom;transform:scaleY(0)}
+.planta .tocar{pointer-events:auto;cursor:pointer;fill:transparent}
+.planta.lista{transform-origin:bottom center}
+
+.planta.sacudida{animation:sacudir .72s cubic-bezier(.34,1.56,.64,1)}
+@keyframes sacudir{
+  0%  {transform:translateX(-50%) rotate(0)}
+  22% {transform:translateX(-50%) rotate(-5deg)}
+  52% {transform:translateX(-50%) rotate(3.4deg)}
+  78% {transform:translateX(-50%) rotate(-1.6deg)}
+  100%{transform:translateX(-50%) rotate(0)}
+}
+
+.planta .visita{
+  position:absolute;left:50%;top:9%;width:24px;margin-left:-12px;
+  line-height:0;pointer-events:none;z-index:3;
+  animation:visitar 6.2s ease-in-out forwards;
+}
+.planta .visita svg{display:block;width:100%;height:auto}
+@keyframes visitar{
+  0%  {opacity:0;transform:translate(96px,-50px) rotate(20deg)}
+  16% {opacity:1;transform:translate(34px,-20px) rotate(-9deg)}
+  28% {transform:translate(6px,-4px) rotate(3deg)}
+  34% {transform:translate(0,0) rotate(0)}
+  70% {opacity:1;transform:translate(0,0) rotate(0)}
+  84% {opacity:1;transform:translate(-32px,-24px) rotate(-13deg)}
+  100%{opacity:0;transform:translate(-96px,-56px) rotate(-22deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .bajar{animation:none}
+  .planta.sacudida{animation:none}
+  .planta .visita{display:none}
+}
+
+.planta.e-monton .monton{transform:scaleY(1);transition:transform .3s cubic-bezier(.2,1.3,.4,1)}
+.planta.e-brote .brote{transform:scale(1) rotate(-26deg);transition:transform .42s cubic-bezier(.2,1.5,.4,1)}
+.planta.e-derecho .brote{transform:scale(1) rotate(0deg);transition:transform .5s cubic-bezier(.3,1.2,.4,1)}
+.planta.e-tallo .cuerpo{transform:scaleY(1);transition:transform 1.5s cubic-bezier(.32,.72,.35,1)}
+.planta.e-hojas .hoja-i{transform:scale(1,1);transition:transform .34s cubic-bezier(.2,1.25,.35,1)}
+.planta.e-hojas .hoja-d{transform:scale(1,1);transition:transform .34s cubic-bezier(.2,1.25,.35,1) .16s}
+.planta.e-capullo .capullo{transform:scale(1);transition:transform .22s cubic-bezier(.3,1.4,.4,1)}
+.planta.e-hincha .capullo{transform:scale(1.16,1.06);transition:transform .24s cubic-bezier(.45,0,.55,1)}
+.planta.e-flor .capullo{transform:scale(0);transition:transform .2s ease}
+.planta.e-flor .corola{transform:scale(1);transition:transform .1s linear}
+.planta.e-flor .brote{opacity:.85}
+
+.planta.e-flor .pb{animation:abrir .46s cubic-bezier(.16,1.34,.36,1) var(--pd,0s) backwards}
+.planta.e-flor .disco{animation:disco .32s cubic-bezier(.2,1.6,.4,1) .12s backwards}
+@keyframes abrir{from{transform:scale(0) rotate(-18deg)}to{transform:scale(1) rotate(0)}}
+@keyframes disco{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(0)}}
+
+.planta.latigazo .cuerpo{animation:latigazo .72s cubic-bezier(.34,1.56,.64,1)}
+@keyframes latigazo{
+  0%{transform:rotate(-4deg) scaleY(.98)}
+  60%{transform:rotate(2.5deg) scaleY(1.012)}
+  100%{transform:rotate(0) scaleY(1)}
+}
+.planta.lista svg{animation:mecer var(--sway,6s) ease-in-out var(--swayd,0s) infinite;transform-origin:bottom center}
+
+.planta.guardada .cuerpo{transform:scaleY(1)}
+.planta.guardada .brote{transform:scale(1)}
+.planta.guardada .hoja-i,.planta.guardada .hoja-d{transform:none}
+.planta.guardada .corola{transform:scale(1)}
+.planta.guardada .monton{transform:scaleY(1)}
+.planta.guardada{opacity:0;animation:aparecer .28s ease var(--fd,0s) forwards}
+@keyframes aparecer{to{opacity:1}}
+
+.js #ramo .vara .flower{transform:scale(.86);opacity:0}
+.js #ramo .vara.entrada .flower{
+  transform:scale(1);opacity:1;
+  transition:transform .38s cubic-bezier(.2,1.25,.35,1),opacity .3s ease;
+}
+
+#petalos{position:fixed;inset:0;width:100%;height:100%;z-index:25;pointer-events:none}
+
+@media (max-height:700px){
+  #a1 h1{font-size:clamp(2.2rem,1.8rem + 3.2vw,3.1rem)}
+  #a1 .para-quien .nombre{font-size:2.2rem}
+  #a1 .para-quien{margin-top:8px}
+  #a1 .eyebrow{font-size:11px;letter-spacing:.1em}
+  .subrayado{height:8px;width:min(58vw,212px)}
+  .sobrecito-zona{margin-top:12px;padding-bottom:12px}
+  .sobrecito{width:min(66vw,252px)}
+  .tira{height:32px;font-size:12px}
+  .sobre-cuerpo{padding:13px 13px 12px}
+  .sobre-titulo{font-size:23px}
+  .sobre-ilu{width:118px;height:120px;margin-top:10px}
+  .sobre-ilu .sello{width:118px;height:102px;top:11px}
+  .sobre-ilu .flower{transform:translateX(-50%) scale(.8);transform-origin:bottom center}
+  .sobre-filete{margin:10px 0 8px}
+  .sobre-chica{font-size:11px}
+  .carta{min-height:58vh;min-height:58svh;padding:22px 20px 26px}
+  .carta p{font-size:16px;line-height:1.56}
+  .ramo-zona{min-height:330px}
+  .cantero{min-height:250px}
+  .notita{min-height:3.4em;font-size:17px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mariposa{animation:none}
+  .js .sobrecito{animation:none}
+  .js .subrayado path{stroke-dashoffset:0;animation:none}
+  .planta.lista svg{animation:none}
+  .js #ramo .banda-0,.js #ramo .banda-1,.js #ramo .banda-2{animation:none}
+  .planta.latigazo .cuerpo{animation:none}
+  .planta.e-flor .pb,.planta.e-flor .disco{animation:none}
+}
